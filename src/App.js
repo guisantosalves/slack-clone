@@ -1,10 +1,14 @@
 import React from 'react';
 import './App.css';
+import Home from './Pages/Home';
+import { Routes, Route, Link } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <h1>let's build slack</h1>
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+      </Routes>
     </div>
   );
 }
