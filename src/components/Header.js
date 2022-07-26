@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { Avatar } from "@mui/material";
 import { AccessTime } from "@mui/icons-material";
 import { Search } from "@mui/icons-material";
+import { HelpOutline } from "@mui/icons-material";
 
 const Header = () =>{
     return(
@@ -18,8 +19,11 @@ const Header = () =>{
             <HeaderSearch>
                 <Search />
                 <input type="text" placeholder="search anything"/>
-
             </HeaderSearch>
+
+            <HeaderRight>
+                <HelpOutline />
+            </HeaderRight>
         </HeaderContainer>
     )
 }
@@ -63,5 +67,33 @@ const HeaderAvatar = styled(Avatar)`
 `;
 
 const HeaderSearch = styled.div`
+    flex: 0.4;
+    opacity: 1;
+    border-radius: 6px;
+    background-color: #421f44;
+    text-align: center;
+    display: flex;
+    padding: 0 50px;
+    border: 1px solid gray;
+
+    > input {
+        background-color: transparent;
+        border: none;
+        text-align: center;
+        min-width: 30vw;
+        outline: 0;
+        color: white;
+    }
 
 `;
+
+const HeaderRight = styled.div`
+    flex: 0.3;
+    display: flex;
+    align-items: flex-end;
+
+    > .MuiSvgIcon-root {
+        margin-left: auto;
+        margin-right: 20px;
+    }
+`;  
