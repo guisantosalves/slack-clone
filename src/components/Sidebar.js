@@ -13,6 +13,8 @@ import { PeopleAlt } from "@mui/icons-material";
 import { Apps } from "@mui/icons-material";
 import { FileCopy } from "@mui/icons-material";
 import { ExpandLess } from "@mui/icons-material";
+import { ExpandMore } from "@mui/icons-material";
+import { Add } from "@mui/icons-material";
 
 const SideBar = () => {
     return(
@@ -38,7 +40,18 @@ const SideBar = () => {
             <SideBarOption Icon={Apps} title="Apps"/>
             <SideBarOption Icon={FileCopy} title="File Browser"/>
             <SideBarOption Icon={ExpandLess} title="Show less"/>
-        
+
+            {/* channels */}
+            <hr/>
+            <SideBarOption Icon={ExpandMore} title="Channels"/>
+            <hr/>
+
+            {/* add */}
+            <SideBarOption Icon={Add} title="Add Channels"/>
+
+            {/* exemple rooms */}
+            <SideBarOption title="Chat"/>
+            
         </SideBarContainer>
     )
 }
@@ -53,6 +66,12 @@ const SideBarContainer = styled.div`
     max-width: 260px;
     margin-top: 60px;
     border: 1px solid #49274b;
+
+    > hr {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #49274b;
+    }
 `;
 
 const SideBarHeader = styled.div`
