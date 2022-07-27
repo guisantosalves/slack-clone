@@ -1,7 +1,18 @@
 import React from "react";
 import styled from "styled-components";
-import { FiberManualRecord } from "@mui/icons-material";
+import SideBarOption from "./SideBarOptions";
+
+// material UI icons
 import { Create } from "@mui/icons-material";
+import { FiberManualRecord } from "@mui/icons-material";
+import { InsertComment } from "@mui/icons-material";
+import { Inbox } from "@mui/icons-material";
+import { Drafts } from "@mui/icons-material";
+import { BookmarkBorder } from "@mui/icons-material";
+import { PeopleAlt } from "@mui/icons-material";
+import { Apps } from "@mui/icons-material";
+import { FileCopy } from "@mui/icons-material";
+import { ExpandLess } from "@mui/icons-material";
 
 const SideBar = () => {
     return(
@@ -17,6 +28,17 @@ const SideBar = () => {
                 </SideBarInfo>
                 <Create />
             </SideBarHeader>
+
+            {/* sidebar options */}
+            <SideBarOption Icon={InsertComment} title="Threads"/>
+            <SideBarOption Icon={Inbox} title="Mentions & reactions"/>
+            <SideBarOption Icon={Drafts} title="Saved Items"/>
+            <SideBarOption Icon={BookmarkBorder} title="Channel browser"/>
+            <SideBarOption Icon={PeopleAlt} title="People & user groups"/>
+            <SideBarOption Icon={Apps} title="Apps"/>
+            <SideBarOption Icon={FileCopy} title="File Browser"/>
+            <SideBarOption Icon={ExpandLess} title="Show less"/>
+        
         </SideBarContainer>
     )
 }

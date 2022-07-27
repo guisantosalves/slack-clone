@@ -1,12 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 
-const SideBarOption = () => {
+const SideBarOption = ({Icon, title}) => {
     return(
-        <div>
-
-        </div>
+        <SideBarOptionContainer>
+            <Icon />
+            <p>{title}</p>
+        </SideBarOptionContainer>
     )
 }
 
 export default SideBarOption;
+
+const SideBarOptionContainer = styled.div`
+
+`;
