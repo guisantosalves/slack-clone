@@ -1,9 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 
-const SideBarOption = ({Icon, title}) => {
+const SideBarOption = ({Icon, title, addChannelOption}) => {
+    
+    const addChannel = () => {
+        
+    }
+
+    const selectChannel = () => {
+        
+    }
+
     return(
-        <SideBarOptionContainer>
+        <SideBarOptionContainer 
+            onClick={addChannelOption ? addChannel : selectChannel}
+        >
             {Icon && <Icon fontSize='small' style={{padding: "10px"}}/>}
             {Icon ? (
                 <h3>{title}</h3>
