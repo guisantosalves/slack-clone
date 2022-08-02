@@ -47,7 +47,7 @@ const SideBar = () => {
             <hr/>
 
             {/* add */}
-            <SideBarOption Icon={Add} title="Add Channels"/>
+            <SideBarOption Icon={Add} title="Add Channels" addChannelOption={true}/>
 
             {/* exemple rooms */}
             <SideBarOption title="Chat"/>
