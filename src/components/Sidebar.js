@@ -16,7 +16,17 @@ import { ExpandLess } from "@mui/icons-material";
 import { ExpandMore } from "@mui/icons-material";
 import { Add } from "@mui/icons-material";
 
+//firebase
+import { collection, addDoc, Timestamp } from "firebase/firestore";
+import db from "../firebase"
+import { useCollection } from 'react-firebase-hooks/firestore';
+
 const SideBar = () => {
+    const [snapshot, loading, error] = useCollection(collection(db, 'rooms'),
+    {
+        snapshotListenOptions: {includeMetadataChanges: true}
+    });
+
     return(
         <SideBarContainer>
             {/* side bar header */}
@@ -49,8 +59,15 @@ const SideBar = () => {
             {/* add */}
             <SideBarOption Icon={Add} title="Add Channels" addChannelOption={true}/>
 
-            {/* exemple rooms */}
-            <SideBarOption title="Chat"/>
+            {/* redering rooms */}
+            {snapshot?.docs.map((item, index) => (
+                <SideBarOption 
+                    key={item.id}
+                    id={item.id}
+                    addChannelOption
+                    title={item.data().name}
+                />    
+            ))}
             
         </SideBarContainer>
     )

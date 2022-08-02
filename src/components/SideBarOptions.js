@@ -4,9 +4,10 @@ import styled from "styled-components";
 // firebase
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 import db from "../firebase"
+import { useCollection } from 'react-firebase-hooks/firestore';
 
 const SideBarOption = ({Icon, title, addChannelOption}) => {
-    
+
     const addChannel = async () => {
         const channelName = prompt('Please enter your channel name: ')
         
