@@ -64,7 +64,7 @@ const SideBar = () => {
                 <SideBarOption 
                     key={item.id}
                     id={item.id}
-                    addChannelOption
+                    addChannelOption={false}
                     title={item.data().name}
                 />    
             ))}

@@ -24,7 +24,7 @@ const SideBarOption = ({Icon, title, addChannelOption}) => {
     }
 
     const selectChannel = () => {
-        
+        console.log("selecting a channel")
     }
 
     return(
@@ -72,13 +72,14 @@ const SideBarOptionChannels = styled.div`
     align-items: center;
     font-size: 12px;
     cursor: pointer;
-    padding: 15px;
+    padding-left: 2px;
+    border: 1px solid red;
     :hover{
         opacity: 0.9;
         background-color: #340e36;
     }
 
     > span {
-        margin-right: 2px;
+        padding: 15px;
     }
 `;
