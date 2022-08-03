@@ -4,7 +4,10 @@ import { Routes, Route } from "react-router-dom";
 import styled from 'styled-components';
 import Header from "./components/Header";
 import SideBar from './components/Sidebar';
+import Chat from './components/Chat';
 
+// sidebar -> flex: 0.3
+// Chat -> flex: 0.7
 function App() {
   return (
     <div className="App">
@@ -13,7 +16,7 @@ function App() {
           <AppBody>
             <SideBar />
             <Routes>
-              <Route path="/" element={<h1>Hey i am the chat</h1>}/>
+              <Route path="/" element={<Chat />}/>
             </Routes>
           </AppBody>
         </>

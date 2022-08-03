@@ -86,7 +86,7 @@ const SideBarOptionChannels = styled.div`
     font-size: 12px;
     cursor: pointer;
     padding-left: 2px;
-
+    font-weight: 800;
     :hover{
         opacity: 0.9;
         background-color: #340e36;
