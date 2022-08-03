@@ -1,12 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 
+// using redux
+import { useDispatch } from "react-redux";
+import { enterRoom } from "../features/appSlice";
+
 // firebase
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 import db from "../firebase"
 import { useCollection } from 'react-firebase-hooks/firestore';
 
-const SideBarOption = ({Icon, title, addChannelOption}) => {
+const SideBarOption = ({Icon, title, addChannelOption, id}) => {
+
+    const dispatch = useDispatch();
 
     const addChannel = async () => {
         const channelName = prompt('Please enter your channel name: ')
@@ -23,8 +29,15 @@ const SideBarOption = ({Icon, title, addChannelOption}) => {
         }
     }
 
+    // dispatch is like a gun which allows us to send data to data layer (global store)
     const selectChannel = () => {
-        console.log("selecting a channel")
+        if(id){
+            // doing a dispatch in roomId through the action enterRoom
+            dispatch(enterRoom({
+                // throw to the state in my store
+                roomId: id
+            }))
+        }
     }
 
     return(
@@ -73,7 +86,7 @@ const SideBarOptionChannels = styled.div`
     font-size: 12px;
     cursor: pointer;
     padding-left: 2px;
-    border: 1px solid red;
+
     :hover{
         opacity: 0.9;
         background-color: #340e36;
