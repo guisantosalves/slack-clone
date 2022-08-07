@@ -8,19 +8,25 @@ import { InfoOutlined } from "@mui/icons-material";
 const Chat = () => {
     return (
         <ChatContainer>
-            <Header>
-                <HeaderLeft>
-                    <h4>
-                        <strong>#Room name</strong>
-                    </h4>
-                    <StarBorderOutlined />
-                </HeaderLeft>
-                <HeaderRight>
-                    <p>
-                        <InfoOutlined /> Details
-                    </p>
-                </HeaderRight>
-            </Header>
+            <>
+            {/* Header chat */}
+                <Header>
+                    <HeaderLeft>
+                        <h4>
+                            <strong>#Room name</strong>
+                        </h4>
+                        <StarBorderOutlined />
+                    </HeaderLeft>
+                    <HeaderRight>
+                        <p>
+                            <InfoOutlined />
+                            Details
+                        </p>
+                    </HeaderRight>
+                </Header>
+
+            {/* chats */}
+            </>
         </ChatContainer>
     )
 }
@@ -44,9 +50,27 @@ const Header = styled.div`
 `;
 
 const HeaderLeft = styled.div`
+    display: flex;
 
+    > h4 {
+        display: flex;
+        text-transform: lowercase;
+    }
+
+    > .MuiSvgIcon-root {
+        margin-left: 10px;
+    }
 `;
 
 const HeaderRight = styled.div`
+    > p {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+    }
 
+    > p > .MuiSvgIcon-root{
+        margin-right: 5px !important;
+        font-size: 16px;
+    }
 `;
