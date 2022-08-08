@@ -10,8 +10,9 @@ import { InfoOutlined } from "@mui/icons-material";
 import { useSelector } from "react-redux";
 
 // firebase
-import { useCollection } from "react-firebase-hooks/firestore";
 import {
+  onSnapshot,
+  query,
   collection,
   orderBy,
   getDoc,
@@ -24,39 +25,38 @@ const Chat = () => {
   // you need to use useSelector -> pass an callback function like bellow
   const idFromStore = useSelector((state) => state.counter.roomId);
   const [nameRoom, setNameRoom] = useState('')
+  const [messages, setMessages] = useState('')
 
-  console.log(typeof(idFromStore))
+  useEffect(() => {
+    if (idFromStore) {
 
-  useEffect(()=>{
-    if(idFromStore){
-      
+      // GETTING A ROOM DOC BY ID
       //to use getDoc is necessary needed be in an async function
       const getItem = async () => {
 
         const docSnapshot = await getDoc(doc(db, "rooms", `${idFromStore}`))
-        if(docSnapshot.exists()){
+
+        if (docSnapshot.exists()) {
+
           setNameRoom(docSnapshot.data().name)
-        }else{
+
+        } else {
           console.log("anything went wrong")
         }
 
       }
       getItem()
-    }else{
-        console.log("escolhe alguma sala")
+
+      // get the rooms messages
+      const q = query(collection(db, `rooms/${idFromStore}/messages`), orderBy("Timestamp", "desc"))
+
+      onSnapshot(q, (queryResult) => {
+        console.log(queryResult)
+      })
+    } else {
+      console.log("escolhe alguma sala")
     }
   }, [idFromStore])
-  // get the rooms details
-
-
-  // get the rooms messages
-  const [snapshotMessages] = useCollection(
-    idFromStore && collection(db, `rooms/${idFromStore}/messages`),
-    orderBy("Timestamp", "asc"),
-    {
-      snapshotListenOptions: { includeMetadataChanges: true },
-    }
-  );
 
   return (
     <ChatContainer>
