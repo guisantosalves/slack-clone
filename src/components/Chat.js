@@ -5,15 +5,17 @@ import ChatInput from "./ChatInput";
 // material UI
 import { StarBorderOutlined } from "@mui/icons-material";
 import { InfoOutlined } from "@mui/icons-material";
-import { style } from "@mui/system";
 
 // using redux
-// import { useSelector } from "react-redux";
-// import { selectRoomId } from "../features/appSlice";
+import { useSelector } from "react-redux";
+import { selectRoomId } from "../features/appSlice";
 
 const Chat = () => {
 
-    // const roomId = useSelector(selectRoomId)
+    // To get data from redux store,
+    // you need to use useSelector -> pass an callback function like bellow
+    const idFromStore = useSelector((state)=>state.counter.roomId)
+
     return (
         <ChatContainer>
             <>
@@ -39,7 +41,7 @@ const Chat = () => {
                 </ChatMessages>
 
                 {/* input to chats */}
-                <ChatInput roomId={2} channelName={"guizaodozap"}/>
+                <ChatInput channelId={idFromStore} channelName={"guizaodozap"}/>
             </>
         </ChatContainer>
     )
