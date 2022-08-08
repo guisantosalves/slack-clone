@@ -1,11 +1,19 @@
 import React from "react";
 import styled from "styled-components";
+import ChatInput from "./ChatInput";
 
 // material UI
 import { StarBorderOutlined } from "@mui/icons-material";
 import { InfoOutlined } from "@mui/icons-material";
+import { style } from "@mui/system";
+
+// using redux
+// import { useSelector } from "react-redux";
+// import { selectRoomId } from "../features/appSlice";
 
 const Chat = () => {
+
+    // const roomId = useSelector(selectRoomId)
     return (
         <ChatContainer>
             <>
@@ -25,7 +33,13 @@ const Chat = () => {
                     </HeaderRight>
                 </Header>
 
-            {/* chats */}
+                {/* chats */}
+                <ChatMessages>
+                
+                </ChatMessages>
+
+                {/* input to chats */}
+                <ChatInput roomId={2} channelName={"guizaodozap"}/>
             </>
         </ChatContainer>
     )
@@ -74,3 +88,5 @@ const HeaderRight = styled.div`
         font-size: 16px;
     }
 `;
+
+const ChatMessages = styled.div``;
