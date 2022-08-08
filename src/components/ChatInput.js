@@ -15,8 +15,6 @@ const ChatInput = ({channelName, channelId}) => {
     
     const [input, setInput] = useState('')
 
-    console.log(channelId)
-
     const sendMessage = (e) => {
         e.preventDefault() //p revents refresh the page
 
