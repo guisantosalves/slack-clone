@@ -71,51 +71,54 @@ const Chat = () => {
 
   // scroll all the messages
   useEffect(()=>{
-    chatRef.current.scrollIntoView({
+    chatRef?.current?.scrollIntoView({
       behavior: "smooth",
       block: "nearest",
       inline: "start"
     });
-  }, [messages])
+  }, [messages, idFromStore])
+
   return (
     <ChatContainer>
-      <>
-        {/* Header chat */}
-        <Header>
-          <HeaderLeft>
-            <h4>
-              <strong>{`#${nameRoom}`}</strong>
-            </h4>
-            <StarBorderOutlined />
-          </HeaderLeft>
-          <HeaderRight>
-            <p>
-              <InfoOutlined />
-              Details
-            </p>
-          </HeaderRight>
-        </Header>
+      {idFromStore && messages && (
+          <>
+          {/* Header chat */}
+          <Header>
+            <HeaderLeft>
+              <h4>
+                <strong>{`#${nameRoom}`}</strong>
+              </h4>
+              <StarBorderOutlined />
+            </HeaderLeft>
+            <HeaderRight>
+              <p>
+                <InfoOutlined />
+                Details
+              </p>
+            </HeaderRight>
+          </Header>
 
-        {/* chats */}
-        <ChatMessages>
-          {messages.map((item, index) => (
-              <Messages
-                message={item?.data.message}
-                timestamp={item?.data.Timestamp}
-                user={item?.data.user}
-                userImage={item?.data.userImage}
-              />
-          ))}
-          <ChatBotom ref={chatRef}/>
-        </ChatMessages>
+          {/* chats */}
+          <ChatMessages>
+            {messages.map((item, index) => (
+                <Messages
+                  message={item?.data.message}
+                  timestamp={item?.data.Timestamp}
+                  user={item?.data.user}
+                  userImage={item?.data.userImage}
+                />
+            ))}
+            <ChatBotom ref={chatRef}/>
+          </ChatMessages>
 
-        {/* input to chats */}
-        <ChatInput 
-          channelId={idFromStore} 
-          channelName={nameRoom}
-          chatRef={chatRef}
-        />
-      </>
+          {/* input to chats */}
+          <ChatInput 
+            channelId={idFromStore} 
+            channelName={nameRoom}
+            chatRef={chatRef}
+          />
+        </>
+      )}
     </ChatContainer>
   );
 };

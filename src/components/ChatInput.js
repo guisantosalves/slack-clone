@@ -32,7 +32,7 @@ const ChatInput = ({channelName, channelId, chatRef}) => {
         setInput('')
 
         // quando envia mensagem ativa esse evento referenciado no component chat
-        chatRef.current.scrollIntoView({
+        chatRef?.current?.scrollIntoView({
             behavior: "smooth",
             block: "nearest",
             inline: "start"
