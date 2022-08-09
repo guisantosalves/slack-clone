@@ -51,7 +51,7 @@ const Chat = () => {
 
       // get the rooms messages
       const getAllMessages = async () => {
-        const q = query(collection(db, `rooms/${idFromStore}/messages`), orderBy("Timestamp", "desc"))
+        const q = query(collection(db, `rooms/${idFromStore}/messages`), orderBy("Timestamp", "asc"))
           onSnapshot(q, (queryResult) => {
             setMessages(queryResult.docs.map((item, index) => ({
               id: item.id,
@@ -88,16 +88,16 @@ const Chat = () => {
 
         {/* chats */}
         <ChatMessages>
-          {messages.map((item, index) => {
-            return(
+          {messages.map((item, index) => (
+            
               <Messages
-                message={item?.data().message}
-                timestamp={item?.data().Timestamp}
-                user={item?.data().user}
-                userImage={item?.data().userImage}
+                message={item?.data.message}
+                timestamp={item?.data.Timestamp}
+                user={item?.data.user}
+                userImage={item?.data.userImage}
               />
-            )
-          })}
+            
+          ))}
         </ChatMessages>
 
         {/* input to chats */}
@@ -127,6 +127,7 @@ const Header = styled.div`
 
 const HeaderLeft = styled.div`
   display: flex;
+  align-items: center;
 
   > h4 {
     display: flex;
