@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import ChatInput from "./ChatInput";
 import Messages from "./Messages";
@@ -27,7 +27,9 @@ const Chat = () => {
   const idFromStore = useSelector((state) => state.counter.roomId);
   const [nameRoom, setNameRoom] = useState('')
   const [messages, setMessages] = useState([])
+  const chatRef = useRef(null)
 
+  // requesting the data from database
   useEffect(() => {
     if (idFromStore) {
 
@@ -64,9 +66,17 @@ const Chat = () => {
     } else {
       console.log("escolhe alguma sala")
     }
+
   }, [idFromStore])
 
-  console.log(messages)
+  // scroll all the messages
+  useEffect(()=>{
+    chatRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "start"
+    });
+  }, [messages])
   return (
     <ChatContainer>
       <>
@@ -89,19 +99,22 @@ const Chat = () => {
         {/* chats */}
         <ChatMessages>
           {messages.map((item, index) => (
-            
               <Messages
                 message={item?.data.message}
                 timestamp={item?.data.Timestamp}
                 user={item?.data.user}
                 userImage={item?.data.userImage}
               />
-            
           ))}
+          <ChatBotom ref={chatRef}/>
         </ChatMessages>
 
         {/* input to chats */}
-        <ChatInput channelId={idFromStore} channelName={nameRoom} />
+        <ChatInput 
+          channelId={idFromStore} 
+          channelName={nameRoom}
+          chatRef={chatRef}
+        />
       </>
     </ChatContainer>
   );
@@ -153,3 +166,7 @@ const HeaderRight = styled.div`
 `;
 
 const ChatMessages = styled.div``;
+
+const ChatBotom = styled.div`
+  padding-bottom: 200px;
+`;

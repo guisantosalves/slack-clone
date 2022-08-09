@@ -8,21 +8,21 @@ import { Button } from "@mui/material";
 import {collection, addDoc, serverTimestamp} from "firebase/firestore";
 import db from "../firebase";
 
-const ChatInput = ({channelName, channelId}) => {
+const ChatInput = ({channelName, channelId, chatRef}) => {
 
     // mudar o estado nao causa renderização quando mudamos o estado
     // const inputRef = useRef(null)
     
     const [input, setInput] = useState('')
 
-    const sendMessage = (e) => {
+    const sendMessage = async (e) => {
         e.preventDefault() //p revents refresh the page
 
         if(!channelId){
             return false
         }
 
-        addDoc(collection(db, `rooms/${channelId}/messages`), {
+        await addDoc(collection(db, `rooms/${channelId}/messages`), {
             message: input,
             Timestamp: serverTimestamp(),
             user: 'guilherme',
@@ -30,6 +30,13 @@ const ChatInput = ({channelName, channelId}) => {
         })
 
         setInput('')
+
+        // quando envia mensagem ativa esse evento referenciado no component chat
+        chatRef.current.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+            inline: "start"
+        });
     }
 
     return(
