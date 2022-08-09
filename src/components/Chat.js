@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import ChatInput from "./ChatInput";
+import Messages from "./Messages";
 
 // material UI
 import { StarBorderOutlined } from "@mui/icons-material";
@@ -25,14 +26,14 @@ const Chat = () => {
   // you need to use useSelector -> pass an callback function like bellow
   const idFromStore = useSelector((state) => state.counter.roomId);
   const [nameRoom, setNameRoom] = useState('')
-  const [messages, setMessages] = useState('')
+  const [messages, setMessages] = useState([])
 
   useEffect(() => {
     if (idFromStore) {
 
       // GETTING A ROOM DOC BY ID
       //to use getDoc is necessary needed be in an async function
-      const getItem = async () => {
+      const getDocById = async () => {
 
         const docSnapshot = await getDoc(doc(db, "rooms", `${idFromStore}`))
 
@@ -45,19 +46,27 @@ const Chat = () => {
         }
 
       }
-      getItem()
+
+      getDocById()
 
       // get the rooms messages
-      const q = query(collection(db, `rooms/${idFromStore}/messages`), orderBy("Timestamp", "desc"))
+      const getAllMessages = async () => {
+        const q = query(collection(db, `rooms/${idFromStore}/messages`), orderBy("Timestamp", "desc"))
+          onSnapshot(q, (queryResult) => {
+            setMessages(queryResult.docs.map((item, index) => ({
+              id: item.id,
+              data: item.data()
+            })))
+          })
+      }
 
-      onSnapshot(q, (queryResult) => {
-        console.log(queryResult)
-      })
+      getAllMessages()
     } else {
       console.log("escolhe alguma sala")
     }
   }, [idFromStore])
 
+  console.log(messages)
   return (
     <ChatContainer>
       <>
@@ -78,7 +87,18 @@ const Chat = () => {
         </Header>
 
         {/* chats */}
-        <ChatMessages></ChatMessages>
+        <ChatMessages>
+          {messages.map((item, index) => {
+            return(
+              <Messages
+                message={item?.data().message}
+                timestamp={item?.data().Timestamp}
+                user={item?.data().user}
+                userImage={item?.data().userImage}
+              />
+            )
+          })}
+        </ChatMessages>
 
         {/* input to chats */}
         <ChatInput channelId={idFromStore} channelName={nameRoom} />
