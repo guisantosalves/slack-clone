@@ -5,6 +5,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   roomId: null,
+  user: null,
 };
 
 export const appSlice = createSlice({
@@ -14,13 +15,22 @@ export const appSlice = createSlice({
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
     enterRoom: (state, action) => {
+
       // my state will catch my dispatch from my app that comes from the action.payload
       state.roomId = action.payload.roomId;
     },
+    login: (state, action) => {
+
+      // my state will catch my dispatch from my app that comes from the action.payload
+      state.user = action.payload.user;
+
+    }
   },
 });
 
 export const { enterRoom } = appSlice.actions;
+
+export const { login } = appSlice.actions;
 
 /*
   A selector is a function that accepts Redux state as an argument  
@@ -28,6 +38,8 @@ export const { enterRoom } = appSlice.actions;
   your application and can also help you encapsulate your global state tree.
 */
 export const selectRoomId = (state) => state.app.roomId;
+
+export const selectUser = (state) => state.app.user;
 
 export default appSlice.reducer;
 

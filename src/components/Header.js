@@ -7,12 +7,19 @@ import { AccessTime } from "@mui/icons-material";
 import { Search } from "@mui/icons-material";
 import { HelpOutline } from "@mui/icons-material";
 
+//redux
+import { useSelector } from "react-redux";
+
 const Header = () =>{
+
+    const userFromStore = useSelector((state) => state.counter.user)
+    console.log(userFromStore.photoURL)
     return(
         <HeaderContainer>
             {/* the header is separeted in 3 parts, left/search/right */}
             <HeaderLeft>
-                <HeaderAvatar />
+                {/* // set photo from react store */}
+                <Avatar src={userFromStore.photoURL}/>
                 <AccessTime />
             </HeaderLeft>
 
