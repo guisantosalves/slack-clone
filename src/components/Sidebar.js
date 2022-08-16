@@ -21,21 +21,26 @@ import { collection, addDoc, Timestamp } from "firebase/firestore";
 import db from "../firebase"
 import { useCollection } from 'react-firebase-hooks/firestore';
 
+// redux
+import { useSelector } from "react-redux";
+
 const SideBar = () => {
     const [snapshot, loading, error] = useCollection(collection(db, 'rooms'),
     {
         snapshotListenOptions: {includeMetadataChanges: true}
     });
 
+    const userFromStore = useSelector((state)=>state.counter.user)
+
     return(
         <SideBarContainer>
             {/* side bar header */}
             <SideBarHeader>
                 <SideBarInfo>
-                    <h2>Guizao</h2>
+                    <h2>{userFromStore.displayName}</h2>
                     <h3>
                         <FiberManualRecord/>
-                        guilherme
+                        {userFromStore.email}
                     </h3>
                 </SideBarInfo>
                 <Create />

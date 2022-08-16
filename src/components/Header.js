@@ -13,13 +13,13 @@ import { useSelector } from "react-redux";
 const Header = () =>{
 
     const userFromStore = useSelector((state) => state.counter.user)
-    console.log(userFromStore.photoURL)
+    
     return(
         <HeaderContainer>
             {/* the header is separeted in 3 parts, left/search/right */}
             <HeaderLeft>
                 {/* // set photo from react store */}
-                <Avatar src={userFromStore.photoURL}/>
+                <Avatar src={userFromStore.photoURL} referrerPolicy="no-referrer"/>
                 <AccessTime />
             </HeaderLeft>
 

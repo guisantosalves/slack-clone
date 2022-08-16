@@ -8,7 +8,12 @@ import { Button } from "@mui/material";
 import {collection, addDoc, serverTimestamp} from "firebase/firestore";
 import db from "../firebase";
 
+// redux
+import { useSelector } from "react-redux";
+
 const ChatInput = ({channelName, channelId, chatRef}) => {
+
+    const userFromStore = useSelector((state)=>state.counter.user)
 
     // mudar o estado nao causa renderização quando mudamos o estado
     // const inputRef = useRef(null)
@@ -25,8 +30,8 @@ const ChatInput = ({channelName, channelId, chatRef}) => {
         await addDoc(collection(db, `rooms/${channelId}/messages`), {
             message: input,
             Timestamp: serverTimestamp(),
-            user: 'guilherme',
-            userImage: 'https://64.media.tumblr.com/138e16d905afb26dbd8b65f418acf570/646539a0699d1a68-01/s1280x1920/a0ecb7a7624567f265a570c5284cb673ba621759.jpg'
+            user: userFromStore.displayName,
+            userImage: userFromStore.photoURL
         })
 
         setInput('')
